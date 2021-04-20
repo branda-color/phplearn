@@ -55,3 +55,27 @@ class Car
 
 
 $car = new Car(3);
+
+
+class A
+{
+    public static function call()
+    {
+        echo "class A" . "<br>";
+    }
+    public static function test()
+    {
+        self::call();
+        static::call(); //靜態屬性
+    }
+}
+
+class B extends A
+{
+    public static function call()
+    {
+        echo "class B" . "<br>";
+    }
+}
+
+B::test();

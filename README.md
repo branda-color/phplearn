@@ -8,3 +8,5 @@
 6.建立php連線mongodb  
 從PECL下載最新PHP for MongoDB的DLL檔，選擇自己環境的PHP版本[Thread Safe (TS)]，下載php_mongodb.dll，並將檔案放置xampp中。
 C:\xampp\php\ext下開啟php.ini，新增一行extension=php_mongodb  
+7.了解匿名函數作用  
+8.了解反射  
