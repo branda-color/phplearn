@@ -12,3 +12,6 @@ C:\xampp\php\ext下開啟php.ini，新增一行extension=php_mongodb
 8.生成亂數驗證碼  
 9.calss類別應用  
 10.繼承  
+11.靜態方法和常量  
+12.接口  
+13.抽象類  
