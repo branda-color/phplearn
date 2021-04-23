@@ -11,6 +11,9 @@ function f1()
 
 include("CommonSpace1.php"); /* 公共空间 */
 
+//include和require的分別在於include就算報警告，後續代碼還是會繼續執行，require會直接報錯停止
+
+
 /* 访问元素 */
 f1(); /* 好心情  当前空间就是Wuhan空间  */
 echo '<br>';
