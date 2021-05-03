@@ -15,3 +15,5 @@ C:\xampp\php\ext下開啟php.ini，新增一行extension=php_mongodb
 11.靜態方法和常量  
 12.接口  
 13.抽象類  
+14.拼接url  
+15.設計模式  
