@@ -13,7 +13,7 @@
 
 */
 
-class Person //類明尊崇大駝峰原則
+class Person //類名尊崇大駝峰原則
 {
     public $age; //屬性==>變量
     public function eat()

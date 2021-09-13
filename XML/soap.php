@@ -11,10 +11,10 @@ $xmldata = <<<EOT
 EOT;
 
 $headers = array(
-    "POST /WebServices/WeatherWebService.asmx HTTP/1.1",
-    "Host: www.webxml.com.cn",
-    "Content-Type: text/xml; charset=utf-8",
-    "Content-Length: " . strlen($xmldata)
+  "POST /WebServices/WeatherWebService.asmx HTTP/1.1",
+  "Host: www.webxml.com.cn",
+  "Content-Type: text/xml; charset=utf-8",
+  "Content-Length: " . strlen($xmldata)
 );
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $soapUrl);
