@@ -58,4 +58,66 @@ $b = new UltraBomb();
 
 $a = new Superman($b);
 
+/**
+ * 實現簡易容器注入
+ */
+
+class Container
+{
+    protected $binds;
+ 
+    protected $instances;
+ 
+    public function bind($abstract, $concrete)
+    {
+        if ($concrete instanceof Closure) {
+            $this->binds[$abstract] = $concrete;
+        } else {
+            $this->instances[$abstract] = $concrete;
+        }
+    }
+ 
+    public function make($abstract, $parameters = [])
+    {
+        if (isset($this->instances[$abstract])) {
+            return $this->instances[$abstract];
+        }
+ 
+        array_unshift($parameters, $this);
+ 
+        return call_user_func_array($this->binds[$abstract], $parameters);
+    }
+}
+
+
+// 創建一個容器(超級工廠)
+$container = new Container;
+ 
+// 向該超級工廠添加超人的生產腳本
+$container->bind('superman', function($container, $moduleName) {
+    return new Superman($container->make($moduleName));
+});
+ 
+//向該 超級工廠添加超能力模組的生產腳本
+$container->bind('xpower', function($container) {
+    return new XPower;
+});
+ 
+// 同上
+$container->bind('ultrabomb', function($container) {
+    return new UltraBomb;
+});
+ 
+// ******************華麗的分割線 **********************
+// 啟動生產
+$superman_1 = $container->make('superman', 'xpower');
+$superman_2 = $container->make('superman', 'ultrabomb');
+$superman_3 = $container->make('superman', 'xpower');
+// ...隨意添加
+
+
+
+
+
+
 
