@@ -17,4 +17,5 @@ C:\xampp\php\ext下開啟php.ini，新增一行extension=php_mongodb
 13.抽象類  
 14.拼接url  
 15.設計模式  
-16.XML資料傳輸  
+16.XML資料傳輸 
+17.學習laravel底層容器注入
