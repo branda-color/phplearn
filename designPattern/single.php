@@ -39,3 +39,91 @@ if ($dog1 === $dog2) {
 } else {
     echo '這兩個是不同對象';
 }
+
+//第一步,普通類
+class single{
+}
+$s1 = new single();
+$s2 = new single();
+//注意兩個對象是1的時候才全等(這邊得到的結果是不同對象)
+if($s1===$s2){
+    echo"是同一個對象";
+}else{
+    echo"不是同一個對象";
+}
+//第2步封鎖new操作
+class sigle{
+protected function __construct(){ 
+}
+}
+//第三步,留個接口可以new對象
+class sigle2{
+    public static function getIn(){
+        return new self();
+    }
+    protected function __construct(){ 
+}
+}
+//這邊得到的結果是不同對象
+$s1 =  sigle2::getIn();
+$s2 =  sigle2::getIn();
+if($s1===$s2){
+    echo"是同一個對象";
+}else{
+    echo"不是同一個對象";
+}
+//第四步getIn先判斷實例
+class single3{
+    protected static $ins=null;
+
+    public static function getIn(){
+        if(self::$ins===null){
+            self::$ins=new self();
+        }
+
+        return self::$ins;
+    }
+    protected function __construct(){ 
+    }
+}
+//這邊得到的結果是同對象
+$s1 =  single3::getIn();
+$s2 =  single3::getIn();
+if($s1===$s2){
+    echo"是同一個對象";
+}else{
+    echo"不是同一個對象";
+}
+class multi extends  single3{
+    public function __construct(){ 
+    }
+}
+//這邊得到的結果是不同對象
+$s1 =  new multi();
+$s2 =  new multi();
+if($s1===$s2){
+    echo"是同一個對象";
+}else{
+    echo"不是同一個對象";
+}
+//第五步,用final防止繼承時被修改權限
+class single4{
+    protected static $ins=null;
+
+    public static function getIn(){
+        if(self::$ins===null){
+            self::$ins=new self();
+        }
+
+        return self::$ins;
+    }   
+    //方法前加final則方法不能被覆蓋,類前加final則類不能被繼承
+    final protected function __construct(){ 
+    }
+
+    //封鎖克隆
+    final protected function __clone(){
+    }
+}
+$s1 =  single4::getIn();
+$s2 =  clone $s1;
