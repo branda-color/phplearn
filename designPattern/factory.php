@@ -59,3 +59,75 @@ class Factory
 
 $person = Factory::createHero('person');
 $jing = Factory::createHero('jingling');
+//共同接口
+interface db
+{
+    function conn();
+}
+
+//如果新增oracle類型怎麼辦?
+//服務端要修改factory的內容(在java,C++中還得再重新編譯)
+//在面相對象設計法則中,重要的開閉原則----對於修改是封閉,對於擴展是開放
+//工廠方法
+interface Factory
+{
+    function createDB();
+}
+
+class dbmysql implements db
+{
+    public function conn()
+    {
+        echo "連上mysql";
+    }
+}
+
+class dbsqlite implements db
+{
+    public function conn()
+    {
+        echo "連上sqlite";
+    }
+}
+
+class mysqlFactory implements Factory
+{
+    public function createDB()
+    {
+        return new dbmysql();
+    }
+}
+
+class sqliteFactory implements Factory
+{
+    public function createDB()
+    {
+        return new dbsqlite();
+    }
+}
+
+//服務器端增加oracle類
+class oracle implements db
+{
+    public function conn()
+    {
+        echo "連上oracle";
+    }
+}
+class oracleFactory implements Factory
+{
+    public function createDB()
+    {
+        return new oracle();
+    }
+}
+
+
+//客戶端開始
+$fact = new mysqlFactory();
+$db = $fact->createDB();
+$db->conn();
+
+$fact = new sqliteFactory();
+$db = $fact->createDB();
+$db->conn();
